@@ -1,0 +1,23 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+bower_components
+
+*~
+.idea
+*.iml
+
+*.swp
+
+.sass-cache
+Thumbs.db
+npm-debug.log
+testem.log
+.*.sw?
+.svn
+*.pdf
+.DS_Store
+*.tmproj
+*.zip
+/doc/tags

@@ -3,6 +3,10 @@ if [ -r ~/.profile ]; then
   source ~/.profile
 fi
 
+if [ -r ~/.bash_funcs ]; then
+  source ~/.bash_funcs
+fi
+
 export CLICOLOR=1
 export HISTCONTROL=ignoredups
 export EDITOR=vim

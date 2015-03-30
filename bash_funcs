@@ -1,0 +1,60 @@
+#!/bin/bash
+
+function md() {
+    mkdir -p $@
+    cd $@
+}
+
+# list last modified files in given directory
+function lh() {
+    find $@ -maxdepth 1 \( ! -iname "." \) -exec stat --format '%Y :%y %n' {} \; | sort -nr | cut -d' ' -f5- | head | xargs -exec ls -lhtd --color=auto
+}
+
+function lfh() {
+    find $@ -maxdepth 1 -type f \( ! -iname "." \) -exec stat --format '%Y :%y %n' {} \; | sort -nr | cut -d' ' -f5- | head | xargs -exec ls -lhtd --color=auto
+}
+
+function lt() {
+    find $@ -maxdepth 1 \( ! -iname "." \) -exec stat --format '%Y :%y %n' {} \; | sort -nr | cut -d' ' -f5- | tail | xargs -exec ls -lhtd --color=auto
+}
+
+# edit the last modified file in the given directory
+function lf() {
+    find $@ -maxdepth 1 -type f \( ! -iname "." \) -exec stat --format '%Y :%y %n' {} \; | sort -nr | cut -d' ' -f5- | head -n 1
+}
+
+# edit the last modified file in the given directory
+function el() {
+    last=`lf $@`;
+    $EDITOR $last
+}
+
+function killit() {
+ps -eaf | grep $@ | awk '{print $2}' | xargs -exec kill -9
+}
+
+function killsudo() {
+ps -eaf | grep $@ | awk '{print $2}' | xargs -exec sudo kill -9
+}
+
+function sedrepl(){
+find . -name "*$1" -type f -exec sed -i 's/'"$2"'/'"$3"'/g' {} \; -print
+}
+
+function mvndbg() {
+    port="4000"
+    if [ $# \> 0 ]
+    then
+        port="$1";
+        shift;
+    fi
+    export MAVEN_OPTS_LAST=$MAVEN_OPTS
+    export MAVEN_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address='$port',server=y -Xmx4G -Xms1G -Djava.awt.headless=true -XX:MaxPermSize=1G -XX:+UseConcMarkSweepGC';
+}
+
+function mvndbgoff() {
+    export MAVEN_OPTS='-Xmx4G -Xms1G -Djava.awt.headless=true -XX:MaxPermSize=1G -XX:+UseConcMarkSweepGC';
+    if [ ! -z "$MAVEN_OPTS_LAST" ]; then
+        export MAVEN_OPTS=$MAVEN_OPTS_LAST;
+    fi
+}

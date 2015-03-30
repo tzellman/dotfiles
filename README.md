@@ -20,10 +20,7 @@ Your existing files will not be replaced unless you --force/-f.
 
 Check [the `bin` directory](https://github.com/tzellman/dotfiles/tree/master/bin) for awesome commands such as:
 
-- ansi2html
 - git-unreleased
-- pair
-- proxy
 - tmux-session
 
 ## git

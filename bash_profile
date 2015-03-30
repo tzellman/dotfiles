@@ -14,13 +14,6 @@ export EDITOR=vim
 PATH=~/bin:"$PATH"
 PATH=bin:"$PATH"
 export PATH
-export PATH="$(consolidate-path "$PATH")"
-
-bash_completion="$(brew --prefix 2>/dev/null)/etc/bash_completion"
-if [ -r "$bash_completion" ]; then
-  source "$bash_completion"
-fi
-unset bash_completion
 
 _git_prompt() {
   local ref="$(command git symbolic-ref -q HEAD 2>/dev/null)"

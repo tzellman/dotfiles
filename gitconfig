@@ -53,6 +53,7 @@
 	reverts = reset --soft HEAD~1
     revertf = commit -c ORIG_HEAD
     prev = !"git for-each-ref --sort=-committerdate --format='%(HEAD) %(refname)' --count=2 refs/heads | grep -v '*' | head -n 1 | rev | cut -d / -f 1 | rev"
+    switch = !"git checkout `git prev`"
 	cm = checkout master
 	pob = pull --rebase origin
 	pub = push origin

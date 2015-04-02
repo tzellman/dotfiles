@@ -8,12 +8,17 @@ if [ -r ~/.bash_funcs ]; then
 fi
 
 export CLICOLOR=1
-export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoreboth
 export EDITOR=vim
 
 PATH=~/bin:"$PATH"
 PATH=bin:"$PATH"
 export PATH
+
+export IDEA_VM_OPTIONS=~/.idea64.vmoptions
+
+export NVM_DIR=~/.nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 _git_prompt() {
   local ref="$(command git symbolic-ref -q HEAD 2>/dev/null)"

@@ -24,7 +24,7 @@ for file in "$here"/*; do
     [[ $name = bin ]] && dotname="$name" || dotname=".${name}"
     dotfull="${HOME}/${dotname}"
 
-    if ! [[ "install readme README" =~ $name || $name =~ ".plist" || -d $file/.git ]]; then
+    if ! [[ "install readme README" =~ $name || $name =~ ".iml" || $name =~ ".plist" || -d $file/.git ]]; then
         if [[ ! -e $dotfull || $force = true ]]; then
             ln -sfnv ${file#$HOME/} "$dotfull"
         fi

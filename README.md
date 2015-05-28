@@ -25,6 +25,15 @@ Check [the `bin` directory](https://github.com/tzellman/dotfiles/tree/master/bin
 
 ## git
 
+Some shortcuts I use regularly:
+
+- `git pom` -> git pull --rebase origin master
+- `git pum` -> git push origin master
+- `git stu` -> show status of only tracked files (`git status -uno`)
+- `git switch` -> checks out the last branch you were working on; useful when switching between branches often
+- `git logme` -> shows the log of your commits
+- `git wc` -> alias for `git whatchanged`
+
 
 ## tmux
 
@@ -34,9 +43,9 @@ Check [the `bin` directory](https://github.com/tzellman/dotfiles/tree/master/bin
 Under tmux prefix `C-a`:
 
 - `C-l` - clear terminal
-- `S` - switch to a session that starts with given name, or switch to the last
-  session if no name given
+- `S` - switch to a session that starts with given name, or switch to the last session if no name given
 - `r` - source `~/.tmux.conf` after changes
+- `P` - save window history to a file
 
 Regular tmux keybindings:
 

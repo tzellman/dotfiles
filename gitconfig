@@ -15,6 +15,8 @@
 [alias]
     diverges = !"git rev-list --boundary $1...$2"
     wip = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"wip\""
+    wipf = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"formatting\""
+    wipc = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"cleanup/compliance\""
     unwip = !"git log -n 1 | grep -q -c wip && git reset HEAD~1"
     rb = !"git wip;git rebase -i origin/master;git unwip"
     pr = !"git fetch;git wip;git rebase --stat origin;git unwip;git heads"
@@ -58,6 +60,8 @@
     pob = pull --rebase origin
     pub = push origin
     logme = !"git log --author `echo $USER`"
+    loga = log --author 
+    wcme = !"git whatchanged --author `echo $USER`"
     lm = logme
 
 [reviewboard]

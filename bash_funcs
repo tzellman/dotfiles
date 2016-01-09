@@ -43,8 +43,7 @@ find . -name "*$1" -type f -exec sed -i 's/'"$2"'/'"$3"'/g' {} \; -print
 
 function mvndbg() {
     port="4000"
-    if [ $# \> 0 ]
-    then
+    if [ $# \> 0 ]; then
         port="$1";
         shift;
     fi
@@ -63,4 +62,16 @@ function genpasswd() {
 	local l=$1
        	[ "$l" == "" ] && l=16
       	tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+}
+
+function recordgif() {
+    local out=out.gif
+    local opts=
+    if [ $# \> 0 ]; then opts="-d $1 $opts"; shift; fi
+    if [ $# \> 0 ]; then out="$1"; shift; fi
+    if [ $# \> 0 ]; then opts="-x $1 $opts"; shift; fi
+    if [ $# \> 0 ]; then opts="-y $1 $opts"; shift; fi
+    if [ $# \> 0 ]; then opts="-w $1 $opts"; shift; fi
+    if [ $# \> 0 ]; then opts="-h $1 $opts"; shift; fi
+    byzanz-record $opts $out
 }

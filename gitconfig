@@ -67,3 +67,5 @@
 [reviewboard]
     url = https://rb.digitalroots.com
 
+[xdcommits]
+    settleFrames = 8

@@ -69,3 +69,6 @@
 
 [xdcommits]
     settleFrames = 8
+    application = ffmpeg
+    gifFrames = 30
+    imageViewer = ristretto

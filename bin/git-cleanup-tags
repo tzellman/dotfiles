@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+tags=$(git tag --list)
+
+s=""
+remote=$(git remote)
+for tag in $tags; do
+    s="$s"$"git push $remote :$tag || true; git tag -d $tag || true"$'\n'
+done
+
+echo "$s" | sort -k11n -k8M -k9n -k10n

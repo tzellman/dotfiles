@@ -4,6 +4,8 @@
 TEMP=`getopt -o vdp: --long verbose,port:,dir: -n 'mongo' -- "$@"`
 
 if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+
+# Note the quotes around `$TEMP': they are essential!
 eval set -- "$TEMP"
 
 PORT="27017"
@@ -22,40 +24,37 @@ done
 mkdir -p $DIR
 cd $DIR
 
-if ! test -d mongodb-linux*; then
+if ! test -d mongodb-linux*
+then
 
-    # Scrape the latest version
-    v=$(curl -s 'http://www.mongodb.org/downloads' | grep "Production Release" | head -n 1 | awk -F\( '{print $2}' | awk -F\) '{print $1}')
-    wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$v.tgz
-    tar zxf mongo*tgz
-    rm mongo*tgz
+# Scrape the latest version
+v=$(curl -s 'https://www.mongodb.org/downloads' | grep "Current Stable Release" | head -n 1 | awk -F\( '{print $2}' | awk -F\) '{print $1}')
+wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$v.tgz
+tar zxf mongo*tgz
+rm -f mongo*tgz
 
-    mkdir -p db
+DIR=`cd mongodb-linux-*;pwd`
 
-    DIR=`cd mongodb-linux-*;pwd`
+for f in mongo mongod mongodump mongoexport mongofiles mongoimport mongooplog mongoperf mongorestore mongos mongostat mongotop
+do
+    update-alternatives --remove-all $f
+    update-alternatives --install /usr/bin/$f $f $DIR/bin/$f 1
+done
 
-    if [ $USER = "root" ]; then
-        for f in mongo mongod mongodump mongoexport mongofiles mongoimport mongooplog mongoperf mongorestore mongos mongostat mongotop
-        do
-            update-alternatives --remove-all $f
-            update-alternatives --install /usr/bin/$f $f $DIR/bin/$f 1
-        done
-    fi
-else
-    DIR=`cd mongodb-linux*;pwd`
-fi
+mkdir -p db
 
-if [ $USER = "root" ]; then
-    svfile=/etc/supervisor/conf.d/mongodb.conf
-    if [[ -e /usr/bin/supervisorctl ]] && [[ ! -e $svfile ]]; then
-        cat <<EOF > $svfile
+svfile=/etc/supervisor/conf.d/mongodb.conf
+if [ ! -e $svfile ]; then
+cat <<EOF > $svfile
 [program:mongodb]
 directory=/data/mongodb/
 command=numactl --interleave=all $DIR/bin/mongod --port $PORT --pidfilepath $PWD/mongo.pid --logpath $PWD/mongo.log --dbpath $PWD/db
 process_name=mongod
 EOF
-        echo 0 > /proc/sys/vm/zone_reclaim_mode
-        supervisorctl reread
-        supervisorctl update
-    fi
+fi
+echo 0 > /proc/sys/vm/zone_reclaim_mode
+
+supervisorctl reread
+supervisorctl update
+
 fi

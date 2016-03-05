@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd ~/.IntelliJIdea15/config
+git add .
+git add -u .
+git commit -m "wip"
+git push

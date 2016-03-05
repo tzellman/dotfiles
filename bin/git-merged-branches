@@ -37,10 +37,12 @@ done
 branches=$(git branch -r $merged "$commit")
 
 s=""
+remote=$(git remote)
 for branch in $branches; do
     info=$(git for-each-ref --format='%(refname:short) # (%(authorname)) %(committerdate)' refs\/remotes\/$branch)
     if [ -n "$info" ]; then
-        s="$s"$'git push --delete '"$info"$'\n'
+        info=$(echo $info | cut -f 2- -d/)
+        s="$s"$"git push $remote :$info"$'\n'
     fi
 done
 

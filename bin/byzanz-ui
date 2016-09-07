@@ -41,7 +41,7 @@ read W < <(awk -F: '/Width/{print $2}' <<< "$XWININFO")
 read H < <(awk -F: '/Height/{print $2}' <<< "$XWININFO")
 
 # Notify the user of recording time and delay
-notify-send "GIFRecorder" "Recording duration set to $D seconds. Recording will start in $DELAY seconds."
+#notify-send "GIFRecorder" "Recording duration set to $D seconds. Recording will start in $DELAY seconds."
 
 #Actual recording
 sleep $DELAY

@@ -102,7 +102,7 @@ fi
 
 export NVM_DIR=~/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-nvm use stable
+nvm use v6.1.0
 
 export CHARLES_LIB=/opt/charles/lib/
 

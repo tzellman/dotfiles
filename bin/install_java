@@ -43,11 +43,31 @@ basename=`basename $basedir`
 mkdir -p $DIR
 mv $basedir $DIR/
 dir=$DIR/$basename
+
 update-alternatives --remove-all java
 update-alternatives --remove-all javac
 update-alternatives --remove-all jar
+update-alternatives --remove-all jps
+update-alternatives --remove-all jstat
+update-alternatives --remove-all jstatd
+update-alternatives --remove-all jmap
+update-alternatives --remove-all jinfo
+update-alternatives --remove-all jcmd
+update-alternatives --remove-all jmc
+update-alternatives --remove-all jhat
+update-alternatives --remove-all jstack
+
 update-alternatives --install /usr/bin/java java $dir/bin/java 1
 update-alternatives --install /usr/bin/javac javac $dir/bin/javac 1
 update-alternatives --install /usr/bin/jar jar $dir/bin/jar 1
+update-alternatives --install /usr/bin/jps jps $dir/bin/jps 1
+update-alternatives --install /usr/bin/jstat jstat $dir/bin/jstat 1
+update-alternatives --install /usr/bin/jstatd jstatd $dir/bin/jstatd 1
+update-alternatives --install /usr/bin/jmap jmap $dir/bin/jmap 1
+update-alternatives --install /usr/bin/jinfo jinfo $dir/bin/jinfo 1
+update-alternatives --install /usr/bin/jcmd jcmd $dir/bin/jcmd 1
+update-alternatives --install /usr/bin/jmc jmc $dir/bin/jmc 1
+update-alternatives --install /usr/bin/jhat jhat $dir/bin/jhat 1
+update-alternatives --install /usr/bin/jstack jstack $dir/bin/jstack 1
 
 fi

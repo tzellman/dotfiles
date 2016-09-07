@@ -16,6 +16,7 @@ PATH=bin:"$PATH"
 export PATH
 
 export IDEA_VM_OPTIONS=~/.idea64.vmoptions
+export ANDROID_HOME=/data/AndroidStudio/Sdk/
 
 export NVM_DIR=~/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

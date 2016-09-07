@@ -1,0 +1,14 @@
+#!/bin/bash
+
+version=$1
+
+npm uninstall -g ember-cli #-- Remove old global ember-cli
+npm cache clean #-- Clear NPM cache
+bower cache clean #-- Clear Bower cache
+npm install -g ember-cli@$version  #-- Install new global ember-cli
+
+rm -rf node_modules bower_components dist tmp #-- Delete temporary development folders.
+npm install --save-dev ember-cli@$version #-- Update project's package.json to use latest version.
+npm install #-- Reinstall NPM dependencies.
+bower install #-- Reinstall bower dependencies.
+ember init

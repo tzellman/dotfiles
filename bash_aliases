@@ -11,5 +11,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias apt-installed='dpkg --get-selections | grep -v deinstall'
 
+alias mvni='mvn install -DskipTests'
 alias mvnci='mvn clean install -DskipTests'
 alias mvncit='mvn clean install'

@@ -41,20 +41,21 @@ function sedrepl(){
 find . -name "*$1" -type f -exec sed -i 's/'"$2"'/'"$3"'/g' {} \; -print
 }
 
-function mvndbg() {
+function gdbg() {
     port="4000"
     if [ $# \> 0 ]; then
         port="$1";
         shift;
     fi
-    export MAVEN_OPTS_LAST=$MAVEN_OPTS
-    export MAVEN_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address='$port',server=y -Xmx4G -Xms1G -Djava.awt.headless=true -XX:MaxPermSize=1G -XX:+UseConcMarkSweepGC';
+    export GRADLE_OPTS_LAST=$GRADLE_OPTS
+    export GRADLE_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address='$port',server=y,suspend=n -Xss1G -Xmx4G -Xms1G -Djava.awt.headless=true -XX:+UseConcMarkSweepGC';
 }
 
-function mvndbgoff() {
-    export MAVEN_OPTS='-Xmx4G -Xms1G -Djava.awt.headless=true -XX:MaxPermSize=1G -XX:+UseConcMarkSweepGC';
+function gdbgoff() {
     if [ ! -z "$MAVEN_OPTS_LAST" ]; then
-        export MAVEN_OPTS=$MAVEN_OPTS_LAST;
+        export GRADLE_OPTS=$GRADLE_OPTS_LAST;
+    else
+        export GRADLE_OPTS='-Xss1G -Xmx4G -Xms1G -Djava.awt.headless=true -XX:+UseConcMarkSweepGC';
     fi
 }
 

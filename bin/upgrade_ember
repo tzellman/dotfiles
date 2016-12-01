@@ -1,14 +1,53 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-version=$1
+USAGE="
+USAGE: $0 [-h|-r repo] <version>
 
-npm uninstall -g ember-cli #-- Remove old global ember-cli
-npm cache clean #-- Clear NPM cache
-bower cache clean #-- Clear Bower cache
-npm install -g ember-cli@$version  #-- Install new global ember-cli
+-g - also update the global version of ember-cli
+-q - quick update; does not delete local artifacts
+-s - skip the ember init step
+-h - displays this help
 
-rm -rf node_modules bower_components dist tmp #-- Delete temporary development folders.
-npm install --save-dev ember-cli@$version #-- Update project's package.json to use latest version.
+"
+
+GLOBAL=false
+QUICK=false
+SKIP_INIT=false
+while true;
+do
+  case "$1" in
+    -h | --help )
+        echo "$USAGE"; exit 1; ;;
+    -g | --global )
+       GLOBAL=true; shift; ;;
+    -q | --quick )
+       QUICK=true; shift; ;;
+    -s | --skip-init )
+       SKIP_INIT=true; shift; ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+if (( $# > 0 )); then
+    VERSION=$1
+else
+    VERSION=$(npm view ember-cli version)
+fi
+
+if ($GLOBAL); then
+    npm uninstall -g ember-cli #-- Remove old global ember-cli
+    npm cache clean #-- Clear NPM cache
+    bower cache clean #-- Clear Bower cache
+    npm install -g ember-cli@$VERSION  #-- Install new global ember-cli
+fi
+
+if !($QUICK); then
+    rm -rf node_modules bower_components dist tmp #-- Delete temporary development folders.
+fi
+npm install --save-dev ember-cli@$VERSION #-- Update project's package.json to use latest version.
 npm install #-- Reinstall NPM dependencies.
 bower install #-- Reinstall bower dependencies.
-ember init
+if !($SKIP_INIT); then
+    ember init
+fi

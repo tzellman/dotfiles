@@ -63,6 +63,7 @@
     loga = log --author 
     wcme = !"git whatchanged --author `echo $USER`"
     lm = logme
+    deleted = log --diff-filter=D --summary
 
 [reviewboard]
     url = https://rb.digitalroots.com

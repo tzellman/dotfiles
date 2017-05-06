@@ -1,6 +1,7 @@
 [user]
     name = Tom Zellman
     email = tzellman@gmail.com
+	signingkey = 46D35D4C365CE61B
 
 [core]
     autocrlf = input
@@ -60,10 +61,14 @@
     pob = pull --rebase origin
     pub = push origin
     logme = !"git log --author `echo $USER`"
-    loga = log --author 
+    loga = log --author
     wcme = !"git whatchanged --author `echo $USER`"
     lm = logme
     deleted = log --diff-filter=D --summary
+    squash = "!sh -c \"git reset --soft HEAD~$1\" -"
+    au = add -u
+    ls = log -5
+    cm = commit -m 
 
 [reviewboard]
     url = https://rb.digitalroots.com

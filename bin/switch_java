@@ -1,53 +1,22 @@
 #!/bin/bash
 
-TEMP=`getopt -o hd:v: --long dir:,version:,jdk,no-jdk,help -n '$0' -- "$@"`
-USAGE="Usage: $0 [options] url recipe"
+TEMP=`getopt -o hd: --long dir:,help -n '$0' -- "$@"`
+USAGE="Usage: $0 [options]"
 
 if [ $? != 0 ] ; then echo "Terminating...\n$USAGE" >&2 ; exit 1 ; fi
 
 # Note the quotes around `$TEMP': they are essential!
 eval set -- "$TEMP"
 
-JDK=true
-DIR=/usr/lib/jvm
-VERSION=JDK8
-
 ARGS=
 while true; do
     case "$1" in
-        -d | --dir ) DIR="$2"; shift 2 ;;
-        --jdk ) JDK=true; shift ;;
-        --no-jdk ) JDK=false; shift ;;
-        -v | --version )  VERSION="$2"; shift 2 ;;
+        -d | --dir ) dir="$2"; shift 2 ;;
         -h | --help )  echo "$USAGE" >&2 ; exit 1 ;;
         -- ) shift; break ;;
         * ) break ;;
     esac
 done
-
-if ($JDK); then
-BASE=$(curl -s http://www.oracle.com/technetwork/java/javase/downloads/index.html | grep $VERSION | head -n 1 | awk -F\javasejdk '{print $2}' | awk -F\href=\" '{print $2}' | cut -f1 -d' ' | cut -f1 -d'"')
-else
-BASE=$(curl -s http://www.oracle.com/technetwork/java/javase/downloads/index.html | grep -oP "(?<=href=\")[^\"]+(?=\")" | grep "server-jre")
-fi
-
-URL=http://www.oracle.com$BASE
-URL=$(curl -s $URL | grep "linux-x64.tar.gz" | head -n 1 | awk -F\filepath\":\" '{print $2}' | cut -f1 -d'"')
-
-echo $URL
-wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" $URL -O java.tar.gz
-
-if test -f ./java.tar.gz; then
-
-tar zxf java.tar.gz
-rm -f java.tar.gz || true
-basename=`ls -d jdk* | tail -1`
-mkdir -p $DIR
-if test -d $DIR/$basename; then
-    rm -rf $DIR/$basename
-fi
-mv $basename $DIR/
-dir=$DIR/$basename
 
 update-alternatives --remove-all java
 update-alternatives --remove-all javac
@@ -74,5 +43,3 @@ update-alternatives --install /usr/bin/jcmd jcmd $dir/bin/jcmd 1
 update-alternatives --install /usr/bin/jmc jmc $dir/bin/jmc 1
 update-alternatives --install /usr/bin/jhat jhat $dir/bin/jhat 1
 update-alternatives --install /usr/bin/jstack jstack $dir/bin/jstack 1
-
-fi

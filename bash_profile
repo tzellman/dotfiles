@@ -18,6 +18,9 @@ export PATH
 export IDEA_VM_OPTIONS=~/.idea64.vmoptions
 export ANDROID_HOME=/data/AndroidStudio/Sdk/
 
+# https://youtrack.jetbrains.com/oauth?state=%2Fissue%2FIDEA-78860
+export IBUS_ENABLE_SYNC_MODE=1
+
 export NVM_DIR=~/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 

@@ -18,6 +18,9 @@ export PATH
 export IDEA_VM_OPTIONS=~/.idea64.vmoptions
 export ANDROID_HOME=/data/AndroidStudio/Sdk/
 
+# IJ - Keyboard input sometimes is blocked when IBus is active - https://youtrack.jetbrains.com/issue/IDEA-78860
+export IBUS_ENABLE_SYNC_MODE=1
+
 # https://youtrack.jetbrains.com/oauth?state=%2Fissue%2FIDEA-78860
 export IBUS_ENABLE_SYNC_MODE=1
 

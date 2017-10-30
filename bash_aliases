@@ -17,3 +17,10 @@ alias mvncit='mvn clean install'
 alias gbxt='gradle build -x test'
 alias gbi='gradle build install -x test'
 alias gb='gradle build'
+
+alias dsa='docker stop $(docker ps -a -q)'
+alias dra='docker rm $(docker ps -a -q)'
+alias dre='docker rm $(docker ps -q -f status=exited)'
+alias dvr='docker volume rm $(docker volume ls -qf dangling=true)'
+alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+

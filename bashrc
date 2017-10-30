@@ -102,7 +102,10 @@ fi
 
 export NVM_DIR=~/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-nvm use v6.1.0
+#nvm use v6.1.0
+
+# https://youtrack.jetbrains.com/issue/IDEA-78860
+export IBUS_ENABLE_SYNC_MODE=1
 
 export CHARLES_LIB=/opt/charles/lib/
 

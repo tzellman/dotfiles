@@ -112,5 +112,3 @@ export CHARLES_LIB=/opt/charles/lib/
 . ~/.bash_funcs
 . ~/.bash_aliases
 
-# added by Anaconda3 4.3.0 installer
-export PATH="/data/opt/anaconda/bin:$PATH"

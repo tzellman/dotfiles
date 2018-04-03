@@ -28,8 +28,8 @@ if ! test -d mongodb-linux*
 then
 
 # Scrape the latest version
-v=$(curl -s 'https://www.mongodb.org/downloads' | grep "Current Stable Release" | head -n 1 | awk -F\( '{print $2}' | awk -F\) '{print $1}')
-wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$v.tgz
+v=$(curl -s 'https://www.mongodb.com/download-center#community' | grep "Current Stable Release" | head -n 1 | awk 'match($0, /Current Stable Release \(([^)]+)/){ print substr($0, RSTART, RLENGTH) }' | cut -f2 -d\()
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-${v}.tgz
 tar zxf mongo*tgz
 rm -f mongo*tgz
 

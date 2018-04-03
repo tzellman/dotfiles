@@ -20,7 +20,7 @@
     wipf = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"Formatting\""
     wipc = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"Cleanup / Compliance\""
     wipr = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"Refactoring\""
-    unwip = !"git log -n 1 | grep -q -c wip && git reset HEAD~1"
+    unwip = !"git log -n 1 | grep -q -c WIP && git reset HEAD~1"
     rb = !"git wip;git rebase -i origin/master;git unwip"
     pr = !"git fetch;git wip;git rebase --stat origin;git unwip;git heads"
     head = !"git log -n1"
@@ -79,8 +79,3 @@
     application = ffmpeg
     gifFrames = 30
     imageViewer = ristretto
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true

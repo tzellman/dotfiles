@@ -14,7 +14,7 @@ alias apt-installed='dpkg --get-selections | grep -v deinstall'
 alias mvni='mvn install -DskipTests'
 alias mvnci='mvn clean install -DskipTests'
 alias mvncit='mvn clean install'
-alias gbxt='gradle build -x test'
+#alias gbxt='gradle build -x test'
 alias gbi='gradle build install -x test'
 alias gb='gradle build'
 

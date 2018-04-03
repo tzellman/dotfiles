@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-TEMP=`getopt -o uhc: --long unmerged,commit:,help -n '$0' -- "$@"`
+TEMP=`getopt -o urahc: --long unmerged,remote,apply,commit:,help -n '$0' -- "$@"`
 
 commit='origin/develop'
 
@@ -24,9 +24,13 @@ if [ $? != 0 ] ; then echo "Terminating...\n$USAGE" >&2 ; exit 1 ; fi
 eval set -- "$TEMP"
 
 merged="--merged"
+remote_arg=""
+apply=false
 while true; do
     case "$1" in
         -u | --unmerged ) merged="--no-merged"; shift ;;
+        -r | --remote ) remote_arg="-r"; shift ;;
+        -a | --apply ) apply=true; shift ;;
         -c | --commit ) commit="$2"; shift 2 ;;
         -h | --help )  echo "$USAGE" >&2 ; exit 1 ;;
         -- ) shift; break ;;
@@ -34,16 +38,26 @@ while true; do
     esac
 done
 
-branches=$(git branch -r $merged "$commit")
+branches=$(git branch $remote_arg $merged "$commit" | grep -v "\*" | xargs -n 1)
 
 s=""
 remote=$(git remote)
 for branch in $branches; do
-    info=$(git for-each-ref --format='%(refname:short) # (%(authorname)) %(committerdate)' refs\/remotes\/$branch)
-    if [ -n "$info" ]; then
-        info=$(echo $info | cut -f 2- -d/)
-        s="$s"$"git push $remote :$info"$'\n'
-    fi
+#    info=$(git for-each-ref --format='%(refname:short) # (%(authorname)) %(committerdate)' refs\/remotes\/$branch)
+#    if [ -n "$info" ]; then
+#        info=$(echo $info | cut -f 2- -d/)
+#        s="$s"$"git push $remote :$info"$'\n'
+        if [ -z "$remote_arg" ]; then
+            if $apply; then
+                git branch -d $branch
+            else
+                s="$s"$"git branch -d $branch"$'\n'
+            fi
+        else
+            s="$s"$"git push $remote :$branch"$'\n'
+        fi
+#    fi
 done
-
-echo "$s" | sort -k11n -k8M -k9n -k10n
+#
+#echo "$s" | sort -k11n -k8M -k9n -k10n
+echo "$s" | sort

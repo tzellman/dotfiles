@@ -49,7 +49,7 @@ if ! ls mysql-*; then
 v=$(curl -s 'https://dev.mysql.com/downloads/' | grep "Current Generally Available Release" | head -n 1 | awk -F: '{print $2}' | awk -F\) '{print $1}' | cut -f 2 -d ' ')
 minor=$(echo $v | awk -F. '{print $1"."$2}')
 echo $minor
-wget http://cdn.mysql.com/Downloads/MySQL-$minor/mysql-$v-linux-glibc2.5-x86_64.tar.gz
+wget http://cdn.mysql.com/Downloads/MySQL-$minor/mysql-$v-linux-glibc2.12-x86_64.tar.gz
 tar zxf mysql-*tar.gz
 rm mysql-*tar.gz
 
@@ -86,16 +86,13 @@ default_time_zone=+0:00
 default-storage-engine=INNODB
 skip-external-locking
 bind-address            = 0.0.0.0
-key_buffer              = 384M
 max_allowed_packet      = 16M
 thread_stack            = 192K
 thread_cache_size       = 8
-myisam-recover         = BACKUP
 query_cache_limit       = 1M
 query_cache_size        = 32M
 expire_logs_days        = 10
 innodb_buffer_pool_size = ${mem}G
-innodb_additional_mem_pool_size = 20M
 innodb_log_buffer_size = 128M
 innodb_flush_log_at_trx_commit = 1
 innodb_thread_concurrency = 16
@@ -132,8 +129,7 @@ if [ ! -e $datadir ]; then
     echo "Installing DB"
     mkdir $datadir
     cd $basedir
-    #$basedir/bin/mysql_secure_installation
-    $basedir/scripts/mysql_install_db --defaults-file=$cnffile --basedir=.
+    $basedir/bin/mysqld --initialize-insecure
 fi
 
 mkdir -p $logdir

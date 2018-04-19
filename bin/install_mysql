@@ -46,7 +46,7 @@ rm -rf /etc/mysql || true
 if ! ls mysql-*; then
 
 # scrape the latest version
-v=$(curl -s 'https://dev.mysql.com/downloads/' | grep "Current Generally Available Release" | head -n 1 | awk -F: '{print $2}' | awk -F\) '{print $1}' | cut -f 2 -d ' ')
+v=$(wget -qO- 'https://dev.mysql.com/downloads/' | grep "Current Generally Available Release" | head -n 1 | awk -F: '{print $2}' | awk -F\) '{print $1}' | cut -f 2 -d ' ')
 minor=$(echo $v | awk -F. '{print $1"."$2}')
 echo $minor
 wget http://cdn.mysql.com/Downloads/MySQL-$minor/mysql-$v-linux-glibc2.12-x86_64.tar.gz

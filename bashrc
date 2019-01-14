@@ -126,3 +126,4 @@ export CHARLES_LIB=/opt/charles/lib/
 . ~/.bash_funcs
 . ~/.bash_aliases
 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -46,3 +46,7 @@ PS1='\[\e[0;31m\]\w\[\e[m\]$(_git_prompt) \[\e[1;31m\]$(_failed_status)\[\e[m\]$
 
 # Allow <C-s> to pass through to shell and programs
 stty -ixon -ixoff
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+source ~/git-completion.bash
+export FLAGS_GETOPT_CMD="$(brew --prefix gnu-getopt)/bin/getopt"
+export FLAGS_GETOPT_CMD="$(brew --prefix gnu-getopt)/bin/getopt"

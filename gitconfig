@@ -16,10 +16,11 @@
 
 [alias]
     diverges = !"git rev-list --boundary $1...$2"
-    wip = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"WIP\""
-    wipf = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"Formatting\""
-    wipc = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"Cleanup / Compliance\""
-    wipr = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"Refactoring\""
+    wip = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"chore: wip\""
+    wipf = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"chore: formatting\""
+    wipd = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"chore: documentation\""
+    wipc = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"chore: cleanup / compliance\""
+    wipr = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"chore: refactoring\""
     unwip = !"git log -n 1 | grep -q -c WIP && git reset HEAD~1"
     rb = !"git wip;git rebase -i origin/master;git unwip"
     pr = !"git fetch;git wip;git rebase --stat origin;git unwip;git heads"

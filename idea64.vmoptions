@@ -1,7 +1,7 @@
 -Xms2G
 -Xmx8G
 -XX:MaxPermSize=756m
--XX:ReservedCodeCacheSize=225m
+-XX:ReservedCodeCacheSize=240m
 -XX:+UseConcMarkSweepGC
 -XX:SoftRefLRUPolicyMSPerMB=50
 -XX:+HeapDumpOnOutOfMemoryError

@@ -21,6 +21,7 @@
     wipd = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"chore: documentation\""
     wipc = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"chore: cleanup / compliance\""
     wipr = !"git add -u; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"chore: refactoring\""
+    newb = "!f() { git checkout -b $1; git push -u origin $1 -o ci.skip; }; f"
     unwip = !"git log -n 1 | grep -q -c WIP && git reset HEAD~1"
     rb = !"git wip;git rebase -i origin/master;git unwip"
     pr = !"git fetch;git wip;git rebase --stat origin;git unwip;git heads"

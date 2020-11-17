@@ -7,6 +7,10 @@ if [ -r ~/.bash_funcs ]; then
   source ~/.bash_funcs
 fi
 
+if [ -r ~/.bash_aliases ]; then
+  source ~/.bash_aliases
+fi
+
 export CLICOLOR=1
 export HISTCONTROL=ignoreboth
 export EDITOR=vim
@@ -17,7 +21,6 @@ PATH=/Users/tzellman/Library/Python/3.7/bin:"$PATH"
 export PATH
 
 export IDEA_VM_OPTIONS=~/.idea64.vmoptions
-export ANDROID_HOME=/data/AndroidStudio/Sdk/
 
 # IJ - Keyboard input sometimes is blocked when IBus is active - https://youtrack.jetbrains.com/issue/IDEA-78860
 export IBUS_ENABLE_SYNC_MODE=1
@@ -68,3 +71,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 eval "$(pyenv virtualenv-init -)"
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+export ANDROID_SDK_ROOT=/Users/tzellman/Library/Android/sdk
+#export VOLTA_HOME="/Users/tzellman/.volta"
+#grep --silent "$VOLTA_HOME/bin" <<< $PATH || export PATH="$VOLTA_HOME/bin:$PATH"

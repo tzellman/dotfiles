@@ -74,6 +74,7 @@
     cm = commit -m 
     can = commit --amend --no-edit
     puf = push --force-with-lease 
+    pufs = push --force-with-lease -o ci.skip
 
 [reviewboard]
     url = https://rb.digitalroots.com

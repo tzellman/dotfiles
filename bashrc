@@ -120,12 +120,8 @@ export NVM_DIR=~/.nvm
 # https://youtrack.jetbrains.com/issue/IDEA-78860
 export IBUS_ENABLE_SYNC_MODE=1
 
-export CHARLES_LIB=/opt/charles/lib/
-
 . ~/.bash_funcs
 . ~/.bash_aliases
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"

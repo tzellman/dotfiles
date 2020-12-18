@@ -13,12 +13,12 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias apt-installed='dpkg --get-selections | grep -v deinstall'
 
-alias mvni='mvn install -DskipTests'
-alias mvnci='mvn clean install -DskipTests'
-alias mvncit='mvn clean install'
+#alias mvni='mvn install -DskipTests'
+#alias mvnci='mvn clean install -DskipTests'
+#alias mvncit='mvn clean install'
 #alias gbxt='gradle build -x test'
-alias gbi='gradle build install -x test'
-alias gb='gradle build'
+#alias gbi='gradle build install -x test'
+#alias gb='gradle build'
 
 alias dsa='docker stop $(docker ps -a -q)'
 alias dra='docker rm $(docker ps -a -q)'
@@ -27,6 +27,6 @@ alias dvr='docker volume rm $(docker volume ls -qf dangling=true)'
 alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias dtop='docker ps -q | xargs  docker stats --no-stream'
 
-alias java8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_191`; java -version"
-alias java11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
+#alias java8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_191`; java -version"
+#alias java11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
 

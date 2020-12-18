@@ -28,12 +28,9 @@
     head = !"git log -n1"
     lost = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
     heads = !"git log origin/master.. --format='%Cred%h%Creset;%C(yellow)%an%Creset;%H;%Cblue%f%Creset' | git name-rev --stdin --always --name-only | column -t -s';'"
-    review = !"post-review --guess-summary --guess-description --parent=HEAD^"
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
     fix = commit --amend -C HEAD
-    pom = pull --rebase origin master
     po = pull --rebase origin
-    pum = push origin master
     pu = push origin
     st = status
     stu = status -uno
@@ -71,13 +68,10 @@
     squash = "!sh -c \"git reset --soft HEAD~$1\" -"
     au = add -u
     ls = log -5
-    cm = commit -m 
+    cm = commit -m
     can = commit --amend --no-edit
-    puf = push --force-with-lease 
+    puf = push --force-with-lease
     pufs = push --force-with-lease -o ci.skip
-
-[reviewboard]
-    url = https://rb.digitalroots.com
 
 [xdcommits]
     settleFrames = 8

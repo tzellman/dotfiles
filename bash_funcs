@@ -41,32 +41,6 @@ function sedrepl(){
 find . -name "*$1" -type f -exec sed -i 's/'"$2"'/'"$3"'/g' {} \; -print
 }
 
-function gdbg() {
-    port="4000"
-    if [ $# \> 0 ]; then
-        port="$1";
-        shift;
-    fi
-    export GRADLE_OPTS_LAST=$GRADLE_OPTS
-    export GRADLE_OPTS='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address='$port' -Xss1G -Xmx4G -Xms1G -Djava.awt.headless=true -XX:+UseConcMarkSweepGC';
-}
-
-function gdbgoff() {
-    if [ ! -z "$MAVEN_OPTS_LAST" ]; then
-        export GRADLE_OPTS=$GRADLE_OPTS_LAST;
-    else
-        export GRADLE_OPTS='-Xss1G -Xmx4G -Xms1G -Djava.awt.headless=true -XX:+UseConcMarkSweepGC';
-    fi
-}
-
-function gbxt() {
-    if [ -e "$PWD/gradlew" ]; then
-        ./gradlew build -x test
-    else
-        gradle build -x test
-    fi
-}
-
 function genpasswd() {
 	local l=$1
        	[ "$l" == "" ] && l=16

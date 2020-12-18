@@ -1,7 +1,0 @@
-#!/bin/bash
-
-cd ~/.IntelliJIdea2016.1/config
-git add .
-git add -u .
-git commit -m "wip"
-git push origin master

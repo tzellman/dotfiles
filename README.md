@@ -27,8 +27,7 @@ Check [the `bin` directory](https://github.com/tzellman/dotfiles/tree/master/bin
 
 Some shortcuts I use regularly:
 
-- `git pom` -> git pull --rebase origin master
-- `git pum` -> git push origin master
+- `git puf` -> push --force-with-lease
 - `git stu` -> show status of only tracked files (`git status -uno`)
 - `git switch` -> checks out the last branch you were working on; useful when switching between branches often
 - `git logme` -> shows the log of your commits
